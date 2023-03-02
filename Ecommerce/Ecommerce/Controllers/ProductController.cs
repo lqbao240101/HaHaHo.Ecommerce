@@ -1,7 +1,7 @@
 ﻿using Ecommerce.Data.IService;
+using Ecommerce.Data.ViewModels;
 using Ecommerce.Models;
 using HAHAHO.ShopHuongDuong.Data.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,7 +39,7 @@ namespace Ecommerce.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> Create([Bind("ProductName, Description, Price, PercentSale, ProductImg, CategoryId, Quantity")] CreateProductModel product)
+        public async Task<IActionResult> Create([Bind("ProductName, Description, Price, PercentSale, ProductImg, CategoryId, Quantity")] NewProductModel product)
         {
             if (!ModelState.IsValid)
             {
@@ -48,27 +48,29 @@ namespace Ecommerce.Controllers
             }
             else
             {
-                try { 
-                await _productService.AddNewProductAsync(product);
-                return Ok(product);
-                } catch (DbUpdateException e)
+                try
+                {
+                    await _productService.AddNewProductAsync(product);
+                    return Ok(product);
+                }
+                catch (DbUpdateException e)
                 {
                     return BadRequest("CategoryId không tồn tại");
                 }
             }
         }
 
-        [HttpPut("{productId}")]
-        public async Task<IActionResult> Update(int productId, Product product)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, NewProductModel product)
         {
-            if (productId == product.Id)
+            if (id == product.Id)
             {
-                await _productService.UpdateAsync(productId, product);
+                await _productService.UpdateProductAsync(product);
                 return Ok(product);
             }
             else
             {
-                return NotFound(productId);
+                return NotFound(id);
             }
         }
 
@@ -86,6 +88,5 @@ namespace Ecommerce.Controllers
                 return Ok("Đã xóa");
             }
         }
-
     }
 }

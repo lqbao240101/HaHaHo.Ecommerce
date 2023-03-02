@@ -1,7 +1,9 @@
 ﻿using Ecommerce.Data.Base;
 using Ecommerce.Data.IService;
+using Ecommerce.Data.ViewModels;
 using Ecommerce.Models;
 using HAHAHO.ShopHuongDuong.Data.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Data.Service
 {
@@ -11,7 +13,7 @@ namespace Ecommerce.Data.Service
         {
         }
 
-        public async Task<Product> AddNewProductAsync(CreateProductModel data)
+        public async Task<Product> AddNewProductAsync(NewProductModel data)
         {
             var newProduct = new Product()
             {
@@ -26,6 +28,23 @@ namespace Ecommerce.Data.Service
             await _context.Products.AddAsync(newProduct);
             await _context.SaveChangesAsync();
             return newProduct;
+        }
+
+        public async Task UpdateProductAsync(NewProductModel data)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(n => n.Id == data.Id);
+        
+            if(product != null) 
+            {
+                product.ProductName = data.ProductName;
+                product.Description = data.Description;
+                product.Price = data.Price;
+                product.PercentSale = data.PercentSale;
+                product.ProductImg = data.ProductImg;
+                product.CategoryId = data.CategoryId;
+                product.Quantity = data.Quantity;
+                await _context.SaveChangesAsync();
+            }
         }
 
         //public async Task<Product> GetProductByIdAsync(int id)

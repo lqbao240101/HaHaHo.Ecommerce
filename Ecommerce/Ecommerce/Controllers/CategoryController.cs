@@ -19,14 +19,14 @@ namespace Ecommerce.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var allCategories = await _categoryService.GetAllAsync();
+            var allCategories = await _categoryService.GetAllAsync(n => n.Products);
             return Ok(allCategories);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Detail(int id)
         {
-            var category = await _categoryService.GetByIdAsync(id);
+            var category = await _categoryService.GetByIdAsync(id, n => n.Products);
             if (category == null)
             {
                 return NotFound();

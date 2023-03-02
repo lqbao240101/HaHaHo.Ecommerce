@@ -10,6 +10,7 @@ namespace Ecommerce.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -40,9 +41,11 @@ namespace Ecommerce.Data
                 entity.Property(e => e.Id).UseIdentityColumn();
 
                 entity.HasOne(e => e.Customer)
-                .WithMany(e => e.Addresses)
+                .WithMany(user => user.Addresses)
                 .HasForeignKey(e => e.CustomerId);
             });
+
+            builder.Entity<CartItem>().HasKey(p => new {p.ProductId, p.CustomerId});
         }
     }
 }

@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace HAHAHO.ShopHuongDuong.Data.ViewModels
 {
-    public class CreateProductModel
+    public class NewProductModel
     {
         public int Id { get; set; }
         public string ProductName { get; set; }

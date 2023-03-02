@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace HAHAHO.ShopHuongDuong.Data.ViewModels
-{
+namespace Ecommerce.Data.ViewModels 
+{ 
+
     public class NewProductModel
     {
         public int Id { get; set; }

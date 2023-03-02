@@ -1,12 +1,13 @@
 ﻿using Ecommerce.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions options) : base(options) { }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Address> Addresses { get; set; }
@@ -46,6 +47,14 @@ namespace Ecommerce.Data
             });
 
             builder.Entity<CartItem>().HasKey(p => new {p.ProductId, p.CustomerId});
+            SeedRoles(builder);
+        }
+        private void SeedRoles(ModelBuilder builder)
+        {
+            builder.Entity<IdentityRole>().HasData(
+                    new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
+                    new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" }
+                );
         }
     }
 }

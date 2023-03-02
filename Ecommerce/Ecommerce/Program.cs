@@ -1,7 +1,11 @@
 using Ecommerce.Data;
 using Ecommerce.Data.IService;
 using Ecommerce.Data.Service;
+using Ecommerce.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace Ecommerce
 {
@@ -22,9 +26,39 @@ namespace Ecommerce
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequiredLength = 5;
+
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+            builder.Services.AddAuthentication(auth =>
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = builder.Configuration["AuthSettings:Audience"],
+                    ValidIssuer = builder.Configuration["AuthSettings:Issuer"],
+                    RequireExpirationTime = true,
+                    IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AuthSettings:Key"])),
+                    ValidateIssuerSigningKey = true
+                };
+            });
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IMailService, GmailService>();
+            builder.Services.AddRazorPages();
 
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddRazorPages();
+
 
             builder.Services.AddControllersWithViews().AddNewtonsoftJson(
                 options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -41,9 +75,12 @@ namespace Ecommerce
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            app.UseStaticFiles();
 
             app.MapControllers();
+
+            app.UseHttpsRedirection();
+            app.MapRazorPages();
 
             app.Run();
         }

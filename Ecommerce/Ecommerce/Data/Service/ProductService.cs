@@ -2,7 +2,6 @@
 using Ecommerce.Data.IService;
 using Ecommerce.Data.ViewModels;
 using Ecommerce.Models;
-using HAHAHO.ShopHuongDuong.Data.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Data.Service

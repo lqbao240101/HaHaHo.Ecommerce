@@ -10,3 +10,15 @@ C:\Users\Phu Cuong\OneDrive\C Sharp\HaHaHo.Ecommerce\Ecommerce\Shared\obj\Debug\
 C:\Users\Phu Cuong\OneDrive\C Sharp\HaHaHo.Ecommerce\Ecommerce\Shared\obj\Debug\net6.0\refint\Shared.dll
 C:\Users\Phu Cuong\OneDrive\C Sharp\HaHaHo.Ecommerce\Ecommerce\Shared\obj\Debug\net6.0\Shared.pdb
 C:\Users\Phu Cuong\OneDrive\C Sharp\HaHaHo.Ecommerce\Ecommerce\Shared\obj\Debug\net6.0\ref\Shared.dll
+D:\HaHaHo.Project\Ecommerce\Shared\bin\Debug\net6.0\Shared.deps.json
+D:\HaHaHo.Project\Ecommerce\Shared\bin\Debug\net6.0\Shared.dll
+D:\HaHaHo.Project\Ecommerce\Shared\bin\Debug\net6.0\Shared.pdb
+D:\HaHaHo.Project\Ecommerce\Shared\obj\Debug\net6.0\Shared.csproj.AssemblyReference.cache
+D:\HaHaHo.Project\Ecommerce\Shared\obj\Debug\net6.0\Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\HaHaHo.Project\Ecommerce\Shared\obj\Debug\net6.0\Shared.AssemblyInfoInputs.cache
+D:\HaHaHo.Project\Ecommerce\Shared\obj\Debug\net6.0\Shared.AssemblyInfo.cs
+D:\HaHaHo.Project\Ecommerce\Shared\obj\Debug\net6.0\Shared.csproj.CoreCompileInputs.cache
+D:\HaHaHo.Project\Ecommerce\Shared\obj\Debug\net6.0\Shared.dll
+D:\HaHaHo.Project\Ecommerce\Shared\obj\Debug\net6.0\refint\Shared.dll
+D:\HaHaHo.Project\Ecommerce\Shared\obj\Debug\net6.0\Shared.pdb
+D:\HaHaHo.Project\Ecommerce\Shared\obj\Debug\net6.0\ref\Shared.dll

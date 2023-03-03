@@ -11,8 +11,8 @@ namespace Ecommerce.Models
         public string Ward { get; set; }
         public string District { get; set; }
         public string City { get; set; }
-
         public string CustomerId { get; set; }
         public ApplicationUser Customer { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }

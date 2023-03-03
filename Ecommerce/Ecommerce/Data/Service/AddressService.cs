@@ -13,7 +13,7 @@ namespace Ecommerce.Data.Service
         {
         }
 
-        public async Task<Address> AddNewAddressAsync(NewAddressModel data)
+        public async Task AddNewAddressAsync(string userId, NewAddressModel data)
         {
             var newAddress = new Address()
             {
@@ -21,12 +21,11 @@ namespace Ecommerce.Data.Service
                 Ward = data.Ward,
                 District= data.District,
                 City = data.City,
-                CustomerId = data.CustomerId,
+                CustomerId = userId,
             };
 
             await _context.Addresses.AddAsync(newAddress);
             await _context.SaveChangesAsync();
-            return newAddress;
         }
 
         public async Task<Address> GetAddressDetail(string userId, int id)
@@ -36,18 +35,16 @@ namespace Ecommerce.Data.Service
             return address;           
         }
 
-        public async Task<List<Address>> GetAddressesByUserIdAndRoleAsync(string userId)
+        public async Task<List<Address>> GetAddressesByUserId(string userId)
         {
-            var addresses = await _context.Addresses.ToListAsync();
-
-            addresses = addresses.Where(n => n.CustomerId == userId).ToList();
+            var addresses = await _context.Addresses.Where(n => n.CustomerId == userId).ToListAsync();
             
             return addresses;
         }
 
-        public async Task UpdateAddressAsync(string customerId,NewAddressModel data)
+        public async Task UpdateAddressAsync(UpdateAddressModel data)
         {
-            var address = await _context.Addresses.FirstOrDefaultAsync(n => n.Id == data.Id && n.CustomerId == customerId);
+            var address = await _context.Addresses.FirstOrDefaultAsync(n => n.Id == data.Id);
 
             if (address != null)
             {

@@ -6,10 +6,12 @@ namespace Ecommerce.Data.IService
 {
     public interface ICartItemService
     {
-        Task<CartItem> Create(NewCartItemModel data);
+        Task<List<CartItem>> GetCartItemsByUserId(string userId);
 
-        //Task Update();
+        Task<CartItem> GetCartItemDetail(string userId, int productId);
 
-        //Task Delete();
+        Task AddNewCartItemAsync(string userId, NewCartItemModel data);
+        Task UpdateCartItemAsync(UpdateCartItemModel data);
+        Task DeleteCartItemAsync(string userId, int productId);
     }
 }

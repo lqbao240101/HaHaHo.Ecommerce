@@ -5,7 +5,7 @@ namespace Ecommerce.Models
     public class ApplicationUser : IdentityUser
     {
         public string FullName { get; set; }
-
         public List<Address> Addresses { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

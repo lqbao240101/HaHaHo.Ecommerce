@@ -1,6 +1,7 @@
 using Ecommerce.Data;
 using Ecommerce.Data.IService;
 using Ecommerce.Data.Service;
+using Ecommerce.Models;
 using Ecommerce.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -26,7 +27,7 @@ namespace Ecommerce
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
@@ -53,8 +54,8 @@ namespace Ecommerce
             });
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IMailService, GmailService>();
-            builder.Services.AddRazorPages();
-
+            builder.Services.AddScoped<ICartItemService, CartItemService>();
+            builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddRazorPages();
@@ -74,6 +75,7 @@ namespace Ecommerce
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseStaticFiles();
 

@@ -5,11 +5,11 @@ using Ecommerce.Models;
 namespace Ecommerce.Data.IService
 {
     public interface IAddressService : IEntityBaseRepository<Address> {
-        Task<List<Address>> GetAddressesByUserIdAndRoleAsync(string userId);
+        Task<List<Address>> GetAddressesByUserId(string userId);
 
         Task<Address> GetAddressDetail(string userId, int id);
 
-        Task<Address> AddNewAddressAsync(NewAddressModel data);
-        Task UpdateAddressAsync(string customerId, NewAddressModel data);
+        Task AddNewAddressAsync(string userId, NewAddressModel data);
+        Task UpdateAddressAsync(UpdateAddressModel data);
     }
 }

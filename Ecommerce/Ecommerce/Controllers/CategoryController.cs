@@ -16,7 +16,7 @@ namespace Ecommerce.Controllers
             _categoryService = categoryService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("")]
         public async Task<IActionResult> GetAll()
         {
             var allCategories = await _categoryService.GetAllAsync(n => n.Products);

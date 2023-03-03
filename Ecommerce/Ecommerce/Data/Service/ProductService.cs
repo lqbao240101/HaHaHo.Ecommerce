@@ -12,7 +12,7 @@ namespace Ecommerce.Data.Service
         {
         }
 
-        public async Task<Product> AddNewProductAsync(NewProductModel data)
+        public async Task AddNewProductAsync(NewProductModel data)
         {
             var newProduct = new Product()
             {
@@ -26,7 +26,6 @@ namespace Ecommerce.Data.Service
             };
             await _context.Products.AddAsync(newProduct);
             await _context.SaveChangesAsync();
-            return newProduct;
         }
 
         public async Task UpdateProductAsync(NewProductModel data)

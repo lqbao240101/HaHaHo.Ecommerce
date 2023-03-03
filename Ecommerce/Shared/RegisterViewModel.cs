@@ -9,6 +9,8 @@ namespace Shared
 {
     public class RegisterViewModel
     {
+        [Required(ErrorMessage = "Họ tên không được để trống")]
+        public string FullName { get; set; }
         [Required]
         [StringLength(50)]
         [EmailAddress]

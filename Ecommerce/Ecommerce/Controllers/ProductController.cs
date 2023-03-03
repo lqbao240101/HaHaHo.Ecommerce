@@ -16,10 +16,10 @@ namespace Ecommerce.Controllers
             _productService = productService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("")]
         public async Task<IActionResult> GetAll()
         {
-            var allProducts = await _productService.GetAllAsync(n => n.Category);
+            var allProducts = await _productService.GetAllAsync();
             return Ok(allProducts);
         }
 
@@ -54,7 +54,7 @@ namespace Ecommerce.Controllers
                 }
                 catch (DbUpdateException e)
                 {
-                    return BadRequest("CategoryId không tồn tại");
+                    return BadRequest("Thông tin cần điền không hợp lệ");
                 }
             }
         }

@@ -21,12 +21,12 @@ namespace Ecommerce.Services
 
     public class UserService : IUserService
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly IMailService _mailService;
 
-        public UserService(UserManager<IdentityUser> userManager,RoleManager<IdentityRole> roleManager,IConfiguration configuration, IMailService mailService)
+        public UserService(UserManager<ApplicationUser> userManager,RoleManager<IdentityRole> roleManager,IConfiguration configuration, IMailService mailService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -48,8 +48,9 @@ namespace Ecommerce.Services
                     IsSuccess= false,
                 };
             }
-            var identityUser = new IdentityUser
+            var identityUser = new ApplicationUser
             {
+                FullName = model.FullName,
                 Email = model.Email,
                 UserName = model.Email,
             };

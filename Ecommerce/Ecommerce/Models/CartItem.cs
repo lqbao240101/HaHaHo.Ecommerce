@@ -10,6 +10,6 @@ namespace Ecommerce.Models
         public ApplicationUser Customer { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }
-        public int quantity { get; set; }
+        public int Quantity { get; set; }
     }
 }

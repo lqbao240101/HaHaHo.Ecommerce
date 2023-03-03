@@ -1,7 +1,5 @@
 ﻿using Ecommerce.Data.IService;
-using Ecommerce.Data.Service;
 using Ecommerce.Data.ViewModels;
-using Ecommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -13,32 +11,31 @@ namespace Ecommerce.Controllers
     public class AddressController : ControllerBase
     {
         private readonly IAddressService _addressService;
-        public AddressController(IAddressService addressService) {
+        public AddressController(IAddressService addressService)
+        {
             _addressService = addressService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("")]
         public async Task<IActionResult> GetAll()
         {
-            string userId = ClaimTypes.NameIdentifier;
-            string userRole = ClaimTypes.Role;
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var addresses = await _addressService.GetAddressesByUserIdAndRoleAsync(userId);
+            var addresses = await _addressService.GetAddressesByUserId(userId);
             return Ok(addresses);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Detail(int id)
         {
-            string userId = ClaimTypes.NameIdentifier;
-            string userRole = ClaimTypes.Role;
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var address = await _addressService.GetAddressDetail(userId, id);
-            if(address == null)
+            if (address == null)
             {
                 return NotFound();
             }
-            
+
             return Ok(address);
         }
 
@@ -49,24 +46,28 @@ namespace Ecommerce.Controllers
             {
                 return BadRequest();
             }
-            try
+            else
             {
-                await _addressService.AddNewAddressAsync(address);
-                return Ok(address);
-            }
-            catch (DbUpdateException de)
-            {
-                return StatusCode(409, de);
+                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                try
+                {
+                    await _addressService.AddNewAddressAsync(userId, address);
+                    return Ok(address);
+                }
+                catch (DbUpdateException e)
+                {
+                    return BadRequest("Thông tin cần điền không hợp lệ");
+                }
             }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            string userId = ClaimTypes.NameIdentifier;
-            
-            var address = _addressService.GetAddressDetail(userId, id);
-            if(address == null)
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var address = await _addressService.GetAddressDetail(userId, id);
+            if (address == null)
             {
                 return NotFound();
             }
@@ -76,12 +77,13 @@ namespace Ecommerce.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, NewAddressModel address)
+        public async Task<IActionResult> Update(int id, UpdateAddressModel address)
         {
-            if (id == address.Id)
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (id == address.Id && userId == address.CustomerId)
             {
-                string userId = ClaimTypes.NameIdentifier;
-                await _addressService.UpdateAddressAsync(userId, address);
+                await _addressService.UpdateAddressAsync(address);
                 return Ok(address);
             }
             else

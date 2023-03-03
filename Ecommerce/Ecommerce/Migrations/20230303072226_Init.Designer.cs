@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230303024115_ChangeUser")]
-    partial class ChangeUser
+    [Migration("20230303072226_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -241,21 +241,21 @@ namespace Ecommerce.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "84878ccc-6780-4a1b-b44b-fe7cd25b0b4b",
+                            Id = "a1b087e5-40d0-42f1-8917-07b5ad2ab200",
                             ConcurrencyStamp = "0",
                             Name = "SuperAdmin",
                             NormalizedName = "SuperAdmin"
                         },
                         new
                         {
-                            Id = "d4e815a2-b240-4c3f-ba5f-f2b89baa0793",
+                            Id = "7ca4800a-6b78-45b1-be26-9ed1b6a83be4",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "7f431fbb-392f-4efa-91e7-e72776296108",
+                            Id = "7378b98e-a6a7-4220-8fd2-6995ce474c9f",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"

@@ -20,7 +20,7 @@ namespace Ecommerce.Data.ViewModels
         [Column(TypeName = "Money")]
         [Range(0, double.MaxValue, ErrorMessage = "Giá bán phải ít nhất là 0 đồng")]
         [DefaultValue(0)]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Giảm giá không được để trống")]
         [Range(0, 100, ErrorMessage = "Giảm giá từ 0 - 100 (%)")]

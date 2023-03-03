@@ -6,8 +6,6 @@ namespace Ecommerce.Data.ViewModels
 {
     public class NewCartItemModel
     {
-        [Required(ErrorMessage = "Phải có id của khách hàng")]
-        public string CustomerId { get; set; }
         [Required(ErrorMessage = "Phải có id của sản phẩm")]
         public int ProductId { get; set; }
         [DefaultValue(1)]

@@ -1,7 +1,6 @@
 ﻿using Ecommerce.Data.Base;
 using Ecommerce.Data.ViewModels;
 using Ecommerce.Models;
-using HAHAHO.ShopHuongDuong.Data.ViewModels;
 
 namespace Ecommerce.Data.IService
 {

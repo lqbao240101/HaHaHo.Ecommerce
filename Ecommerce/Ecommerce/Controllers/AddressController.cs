@@ -2,7 +2,6 @@
 using Ecommerce.Data.Service;
 using Ecommerce.Data.ViewModels;
 using Ecommerce.Models;
-using HAHAHO.ShopHuongDuong.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;

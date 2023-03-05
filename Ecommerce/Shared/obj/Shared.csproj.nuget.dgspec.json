@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\HaHaHo.Project\\Ecommerce\\Shared\\Shared.csproj": {}
+    "C:\\Users\\Phu Cuong\\OneDrive\\C Sharp\\HaHaHo.Ecommerce\\Ecommerce\\Shared\\Shared.csproj": {}
   },
   "projects": {
-    "D:\\HaHaHo.Project\\Ecommerce\\Shared\\Shared.csproj": {
+    "C:\\Users\\Phu Cuong\\OneDrive\\C Sharp\\HaHaHo.Ecommerce\\Ecommerce\\Shared\\Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HaHaHo.Project\\Ecommerce\\Shared\\Shared.csproj",
+        "projectUniqueName": "C:\\Users\\Phu Cuong\\OneDrive\\C Sharp\\HaHaHo.Ecommerce\\Ecommerce\\Shared\\Shared.csproj",
         "projectName": "Shared",
-        "projectPath": "D:\\HaHaHo.Project\\Ecommerce\\Shared\\Shared.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\HaHaHo.Project\\Ecommerce\\Shared\\obj\\",
+        "projectPath": "C:\\Users\\Phu Cuong\\OneDrive\\C Sharp\\HaHaHo.Ecommerce\\Ecommerce\\Shared\\Shared.csproj",
+        "packagesPath": "C:\\Users\\Phu Cuong\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Phu Cuong\\OneDrive\\C Sharp\\HaHaHo.Ecommerce\\Ecommerce\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Phu Cuong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

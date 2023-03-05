@@ -61,8 +61,8 @@ namespace Ecommerce.Services
             {
 
                 // assign role
-                if (await _roleManager.RoleExistsAsync(model.Role))
-                    await _userManager.AddToRoleAsync(identityUser, model.Role);
+                if (await _roleManager.RoleExistsAsync("User"))
+                    await _userManager.AddToRoleAsync(identityUser, "User");
                 // TODO: Send a confirmation email
                 var confirmEmailToken = await _userManager.GenerateEmailConfirmationTokenAsync(identityUser);
 

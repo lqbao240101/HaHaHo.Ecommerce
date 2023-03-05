@@ -1,5 +1,7 @@
-﻿using Ecommerce.Data.IService;
+﻿using AutoMapper;
+using Ecommerce.Data.IService;
 using Ecommerce.Data.ViewModels;
+using Ecommerce.Helper;
 using Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,9 +10,12 @@ namespace Ecommerce.Data.Service
     public class OrderService : IOrderService
     {
         private readonly ApplicationDbContext _context;
-        public OrderService(ApplicationDbContext context)
+        private readonly IMapper _mapper;
+
+        public OrderService(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public async Task<EntityResponseMessage> StoreOrderAsync(List<int> productIds, string userId, int addressId)
         {
@@ -92,5 +97,20 @@ namespace Ecommerce.Data.Service
                 };
             }
         }
+
+        public List<OrderView> GetOrders(string userId)
+        {
+            var orders = _mapper.Map<List<OrderView>>(_context.Orders.Where(o => o.CustomerId == userId).ToList());
+            return orders;
+        }
+
+        
+
+        public OrderView GetOrder(string userId, int orderId)
+        {
+            var order = _mapper.Map<OrderView>(_context.Orders.FirstOrDefault(o => o.CustomerId == userId && o.Id == orderId));
+            return order;
+        }
+
     }
 }

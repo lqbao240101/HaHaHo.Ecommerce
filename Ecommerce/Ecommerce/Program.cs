@@ -52,12 +52,16 @@ namespace Ecommerce
                     ValidateIssuerSigningKey = true
                 };
             });
+
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IMailService, GmailService>();
             builder.Services.AddScoped<ICartItemService, CartItemService>();
             builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddRazorPages();
 
 

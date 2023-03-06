@@ -1,5 +1,5 @@
 ﻿using Ecommerce.Data.IService;
-using Ecommerce.Models;
+using Ecommerce.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -46,7 +46,7 @@ namespace Ecommerce.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> MakeOrder(List<int> productIds, int addressId)
+        public async Task<IActionResult> MakeOrder(NewOrderModel order)
         {
             if (!ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace Ecommerce.Controllers
                 string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 try
                 {
-                    var result = await _orderService.StoreOrderAsync(productIds, User.FindFirstValue(ClaimTypes.NameIdentifier), addressId);
+                    var result = await _orderService.StoreOrderAsync(order.ProductIds, userId, order.AddressId);
                     return Ok(result);
                 }
                 catch (DbUpdateException e)

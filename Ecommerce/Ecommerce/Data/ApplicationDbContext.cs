@@ -39,6 +39,10 @@ namespace Ecommerce.Data
                 entity.HasIndex(e => e.ProductName).IsUnique(true);
             });
 
+            builder.Entity<Product>()
+                .Property(e => e.Price)
+                .HasColumnType("decimal(18,4)");
+
             builder.Entity<Address>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -61,7 +65,16 @@ namespace Ecommerce.Data
                 .HasForeignKey(e => e.CustomerId);
             });
 
-            builder.Entity<OrderDetail>().HasKey(p => new { p.OrderId, p.ProductId });
+            builder.Entity<OrderDetail>()
+                .HasKey(p => new { p.OrderId, p.ProductId });
+
+            builder.Entity<OrderDetail>()
+                .Property(e => e.Price)
+                .HasColumnType("decimal(18,4)");
+
+            builder.Entity<OrderDetail>()
+                .Property(e => e.Total)
+                .HasColumnType("decimal(18,4)");
 
             SeedRoles(builder);
         }

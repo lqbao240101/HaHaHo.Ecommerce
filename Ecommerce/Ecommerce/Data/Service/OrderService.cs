@@ -27,13 +27,14 @@ namespace Ecommerce.Data.Service
 
                 if (cartItem != null)
                 {
-                    if (cartItem.Quantity <= cartItem.Product.Quantity)
+                    var product = await _context.Products.FirstOrDefaultAsync(n => n.Id == cartItem.ProductId);
+                    if (cartItem.Quantity <= product.Quantity)
                         cartItems.Add(cartItem);
                     else
                     {
                         return new EntityResponseMessage
                         {
-                            Message = $"Sản phẩm {cartItem.Product.ProductName} không đủ số lượng yêu cầu",
+                            Message = $"Sản phẩm {product.ProductName} không đủ số lượng yêu cầu",
                             IsSuccess = false
                         };
                     }
@@ -68,16 +69,20 @@ namespace Ecommerce.Data.Service
 
                 foreach (var cartItem in cartItems)
                 {
+                    var product = await _context.Products.FirstOrDefaultAsync(n => n.Id == cartItem.ProductId);
+
                     var orderdetail = new OrderDetail()
                     {
                         OrderId = order.Id,
                         ProductId = cartItem.ProductId,
                         Quantity = cartItem.Quantity,
-                        PercentSale = cartItem.Product.PercentSale,
-                        Price = cartItem.Product.Price,
-                        Total = (cartItem.Quantity * cartItem.Product.Price) * (decimal)(100.0 - cartItem.Product.PercentSale) / 100
+                        PercentSale = product.PercentSale,
+                        Price = product.Price,
+                        Total = (cartItem.Quantity * product.Price) * (decimal)(100.0 - product.PercentSale) / 100
                     };
 
+                    product.Quantity -= orderdetail.Quantity;
+                  
                     await _context.OrderDetails.AddAsync(orderdetail);
                 }
 
@@ -100,7 +105,7 @@ namespace Ecommerce.Data.Service
 
         public List<OrderView> GetOrders(string userId)
         {
-            var orders = _mapper.Map<List<OrderView>>(_context.Orders.Where(o => o.CustomerId == userId).ToList());
+            var orders = _mapper.Map<List<OrderView>>(_context.Orders.Include(n => n.OrderDetails).Where(o => o.CustomerId == userId).ToList());
             return orders;
         }
 
@@ -108,9 +113,8 @@ namespace Ecommerce.Data.Service
 
         public OrderView GetOrder(string userId, int orderId)
         {
-            var order = _mapper.Map<OrderView>(_context.Orders.FirstOrDefault(o => o.CustomerId == userId && o.Id == orderId));
+            var order = _mapper.Map<OrderView>(_context.Orders.Include(n => n.OrderDetails).FirstOrDefault(o => o.CustomerId == userId && o.Id == orderId));
             return order;
         }
-
     }
 }

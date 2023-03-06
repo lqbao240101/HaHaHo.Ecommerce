@@ -1,4 +1,6 @@
-﻿namespace Ecommerce.Data.ViewModels
+﻿using Ecommerce.Models;
+
+namespace Ecommerce.Data.ViewModels
 {
     public class OrderView
     {
@@ -10,5 +12,6 @@
         public string District { get; set; }
         public string City { get; set; }
         public string CustomerId { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }

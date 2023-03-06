@@ -4,6 +4,7 @@ using Ecommerce.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230305125213_updateeee")]
+    partial class updateeee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,13 +224,13 @@ namespace Ecommerce.Migrations
                         .HasColumnType("float");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,4)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,4)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderId", "ProductId");
 
@@ -256,7 +258,7 @@ namespace Ecommerce.Migrations
                         .HasColumnType("float");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,4)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ProductImg")
                         .IsRequired()
@@ -308,21 +310,21 @@ namespace Ecommerce.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "609085bf-cb30-4b30-baeb-b6a31b8b5a98",
+                            Id = "4ff73e26-9493-4dcd-add1-cd4c73434ce7",
                             ConcurrencyStamp = "0",
                             Name = "SuperAdmin",
                             NormalizedName = "SuperAdmin"
                         },
                         new
                         {
-                            Id = "2332283e-be9e-4c5e-9646-31656c2d2b4e",
+                            Id = "89b33b82-c2bc-41c8-a8d9-ffb709cd18cb",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "e05305f1-c69f-4408-9dcc-ebd2835e349c",
+                            Id = "ea0f19a9-ebae-4757-9e2e-9b817e8b821f",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"

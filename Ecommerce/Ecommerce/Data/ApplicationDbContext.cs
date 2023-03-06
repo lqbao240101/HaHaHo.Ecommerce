@@ -68,6 +68,7 @@ namespace Ecommerce.Data
             builder.Entity<OrderDetail>()
                 .HasKey(p => new { p.OrderId, p.ProductId });
 
+
             builder.Entity<OrderDetail>()
                 .Property(e => e.Price)
                 .HasColumnType("decimal(18,4)");

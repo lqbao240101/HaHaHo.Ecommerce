@@ -22,7 +22,7 @@ namespace Ecommerce.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             try
             {
-                var result = _orderService.GetOrders(userId);
+                var result = await _orderService.GetOrders(userId);
                 return Ok(result);
             }
             catch (DbUpdateException e)
@@ -36,7 +36,7 @@ namespace Ecommerce.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             try
             {
-                var result = _orderService.GetOrder(userId, id);
+                var result = await _orderService.GetOrder(userId, id);
                 return Ok(result);
             }
             catch (DbUpdateException e)
@@ -59,7 +59,13 @@ namespace Ecommerce.Controllers
                 try
                 {
                     var result = await _orderService.StoreOrderAsync(order.ProductIds, userId, order.AddressId);
-                    return Ok(result);
+
+                    return result.StatusCode switch
+                    {
+                        400 => BadRequest(result),
+                        404 => NotFound(result),
+                        _ => Ok(result),
+                    };
                 }
                 catch (DbUpdateException e)
                 {
@@ -67,5 +73,11 @@ namespace Ecommerce.Controllers
                 }
             }
         }
+
+        //[HttpPost("{id}")]
+        //public async Task<IActionResult> CancelOrder(int id)
+        //{
+            
+        //}
     }
 }

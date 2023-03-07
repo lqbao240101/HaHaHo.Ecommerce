@@ -1,11 +1,14 @@
 ﻿using Ecommerce.Data.IService;
 using Ecommerce.Data.ViewModels;
 using Ecommerce.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Ecommerce.Controllers
 {
+    [Authorize(Roles = "SuperAdmin, Admin")]
     [ApiController]
     [Route("[controller]")]
     public class ProductController : ControllerBase
@@ -16,6 +19,7 @@ namespace Ecommerce.Controllers
             _productService = productService;
         }
 
+        [AllowAnonymous]
         [HttpGet("")]
         public async Task<IActionResult> GetAll()
         {
@@ -23,6 +27,7 @@ namespace Ecommerce.Controllers
             return Ok(allProducts);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> Detail(int id)
         {

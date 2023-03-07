@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Controllers
 {
+    [Authorize(Roles = "SuperAdmin, Admin")]
     [ApiController]
     [Route("[controller]")]
     public class CategoryController : ControllerBase
@@ -16,6 +17,7 @@ namespace Ecommerce.Controllers
             _categoryService = categoryService;
         }
 
+        [AllowAnonymous]
         [HttpGet("")]
         public async Task<IActionResult> GetAll()
         {
@@ -23,6 +25,7 @@ namespace Ecommerce.Controllers
             return Ok(allCategories);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> Detail(int id)
         {

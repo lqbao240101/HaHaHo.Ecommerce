@@ -32,7 +32,7 @@ namespace Ecommerce.Data.Service
         {
             var address = await _context.Addresses.FirstOrDefaultAsync(n => n.Id == id && n.CustomerId == userId);
 
-            return address;           
+            return address;
         }
 
         public async Task<List<Address>> GetAddressesByUserId(string userId)

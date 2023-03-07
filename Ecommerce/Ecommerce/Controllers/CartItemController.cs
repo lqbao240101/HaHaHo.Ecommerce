@@ -1,12 +1,15 @@
 ﻿using Ecommerce.Data.IService;
 using Ecommerce.Data.Service;
 using Ecommerce.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Security.Claims;
 
 namespace Ecommerce.Controllers
 {
+    [Authorize(Roles = "User")]
     [ApiController]
     [Route("[controller]")]
     public class CartItemController : ControllerBase

@@ -9,10 +9,11 @@ namespace Ecommerce.Data.ViewModels
     public class NewProductModel
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
         public string ProductName { get; set; }
 
         [Required(ErrorMessage = "Thông tin không được để trống")]
-        [MinLength(10, ErrorMessage = "Tên phải có ít nhất 10 ký tự")]
+        [MinLength(10, ErrorMessage = "Thông tin phải có ít nhất 10 ký tự")]
         [Column(TypeName = "ntext")]
         public string Description { get; set; }
 

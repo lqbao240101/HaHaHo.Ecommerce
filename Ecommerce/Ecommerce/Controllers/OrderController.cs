@@ -1,11 +1,15 @@
 ﻿using Ecommerce.Data.IService;
 using Ecommerce.Data.ViewModels;
+using Ecommerce.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Security.Claims;
 
 namespace Ecommerce.Controllers
 {
+    [Authorize(Roles = "User")]
     [ApiController]
     [Route("[controller]")]
     public class OrderController : ControllerBase
@@ -74,10 +78,27 @@ namespace Ecommerce.Controllers
             }
         }
 
-        //[HttpPost("{id}")]
-        //public async Task<IActionResult> CancelOrder(int id)
-        //{
-            
-        //}
+        [AllowAnonymous]
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> CancelOrder(int id)
+        {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string role = User.FindFirstValue(ClaimTypes.Role);
+            try
+            {
+                var result = await _orderService.CancelOrder(id, role, userId);
+
+                return result.StatusCode switch
+                {
+                    400 => BadRequest(result),
+                    404 => NotFound(result),
+                    _ => Ok(result),
+                };
+            }
+            catch (DbUpdateException e)
+            {
+                return BadRequest("Thông tin cần điền không hợp lệ");
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Ecommerce.Models;
+﻿using Ecommerce.Data.Enums;
+using Ecommerce.Models;
 
 namespace Ecommerce.Data.ViewModels
 {
@@ -6,7 +7,7 @@ namespace Ecommerce.Data.ViewModels
     {
         public int Id { get; set; }
         public DateTime DateCreated { get; set; }
-        public string Status { get; set; }
+        public OrderStatus Status { get; set; }
         public string Street { get; set; }
         public string Ward { get; set; }
         public string District { get; set; }
